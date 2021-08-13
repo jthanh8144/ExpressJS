@@ -5,6 +5,9 @@ const port = 3000
 const handlebars = require('express-handlebars');
 const path = require('path');
 
+// static file
+app.use(express.static(path.join(__dirname, 'public')));
+
 // HTTP logger
 app.use(morgan('combined'));
 
