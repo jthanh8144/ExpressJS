@@ -29,6 +29,15 @@ class CourseController {
             });
         // res.json(formData);
     }
+
+    // [GET] /courses/:id/edit
+    edit(req, res, next) {
+        Course.findById(req.params.id)
+            .then(course => res.render('courses/edit', {
+                course: mongooseToObject(course)
+            }))
+            .catch(next);
+    }
 }
 
 module.exports = new CourseController();
