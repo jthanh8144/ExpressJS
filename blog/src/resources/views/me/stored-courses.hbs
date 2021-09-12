@@ -23,6 +23,13 @@
                     <a href="" class="btn btn-link" data-id="{{this._id}}" data-toggle="modal" data-target="#delete-course-modal">Xóa</a>
                 </td>
             </tr>
+            {{else}}
+            <tr>
+                <td colspan="5" class="text-center">
+                    Bạn chưa đăng khóa học nào.
+                    <a href="/courses/create">Đăng khóa học</a>
+                </td>
+            </tr>
             {{/each}}
         </tbody>
     </table>
