@@ -41,7 +41,7 @@ app.engine(
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
 
-// routes init
+// routes init anc
 route(app);
 
 app.listen(port, () => {
