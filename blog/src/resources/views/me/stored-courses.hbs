@@ -1,4 +1,4 @@
-<div class="mt-4">
+<form class="mt-4" name="container-form" method="POST" action="/courses/handle-form-actions">
     <div>
         <h3>Khóa học của tôi</h3>
         <a href="/me/trash/courses">Thùng rác ({{deletedCount}})</a>
@@ -11,12 +11,12 @@
                 </label>
             </div>
 
-            <select class="form-control form-control-sm select-options" id="">
-                <option>-- Chọn hành động --</option>
+            <select class="form-control form-control-sm select-options" name="action" required>
+                <option value="">-- Chọn hành động --</option>
                 <option value="delete">Xóa</option>
             </select>
 
-            <button class="btn btn-primary btn-sm disabled">Thực hiện</button>
+            <button class="btn btn-primary btn-sm btn-execute disabled">Thực hiện</button>
         </div>
     </div>
 
@@ -59,7 +59,7 @@
             {{/each}}
         </tbody>
     </table>
-</div>
+</form>
 
 <div class="modal" id="delete-course-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -93,6 +93,9 @@
         var checkboxAll = $('#checkbox-all');
         var courseItemCheckBox = $('input[name="courseIDs[]"]');
 
+        var executeBtn = $('.btn-execute');
+        var containerForm = document.forms['container-form'];
+
         // When dialog confirm clicked
         $('#delete-course-modal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
@@ -104,14 +107,42 @@
             deleteForm.submit();
         }
 
-        //checkbox all clicked
+        //checkbox all changed
         checkboxAll.change(function () {
             var isCheckedAll = $(this).prop('checked');
             if (isCheckedAll) {
+                courseItemCheckBox.prop('checked', true);
+            } else {
+                courseItemCheckBox.prop('checked', false);
+            }
+            renderExecuteBtn();
+        });
 
+        // Course item checkbox changed
+        courseItemCheckBox.change(function () {
+            var isCheckedAll = courseItemCheckBox.length === $('input[name="courseIDs[]"]:checked').length;
+            checkboxAll.prop('checked', isCheckedAll);
+            renderExecuteBtn();
+        });
+
+        // Execute button clicked
+        executeBtn.click(function (e) {
+            var isSubmitable = $(this).hasClass('disabled');
+            if (isSubmitable) {
+                e.preventDefault();
             }
         });
 
-        console.log(courseItemCheckBox);
+        // Re-render button execute
+        function renderExecuteBtn() {
+            var checkedCount = $('input[name="courseIDs[]"]:checked').length;
+            if (checkedCount != 0) {
+                executeBtn.removeClass('disabled');
+            } else {
+                executeBtn.addClass('disabled');
+            }
+            
+        }
+        
     });
 </script>
