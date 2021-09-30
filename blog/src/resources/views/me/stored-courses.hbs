@@ -27,12 +27,16 @@
                 <th scope="col">#</th>
                 <th scope="col">
                     Tên khóa học
-                    <a href="?_sort&column=name&type=desc">
-                        <span class="oi oi-elevator"></span>
-                    </a>
+                    {{{ sortable 'name' _sort }}}
                 </th>
-                <th scope="col">Video ID</th>
-                <th scope="col">Thời gian tạo</th>
+                <th scope="col">
+                    Video ID
+                    {{{ sortable 'videoID' _sort }}}
+                </th>
+                <th scope="col">
+                    Thời gian tạo
+                    {{{ sortable 'createdAt' _sort }}}
+                </th>
                 <th scope="col"></th>
             </tr>
         </thead>
