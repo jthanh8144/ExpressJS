@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/update/{{result.dataid}}?_method=PUT" method="POST" id="login-form">
+        ID <input type="text" name="id" id="inp-id" value="{{result.dataid}}" readonly>
+        Name <input type="text" name="name" id="inp-name" value="{{result.dataname}}">
+        <input type="submit" value="Cập nhập">
+    </form>
+    <a href="/">Home</a>
+    
+</body>
+
+</html>
