@@ -1,0 +1,18 @@
+*use csrf:
+
+// app.js
+import csrf from 'csurf'
+
+    this.app.use(cookieParser())
+    this.app.use(bodyParser.json())
+    this.app.use(csrf({ cookie: true }))
+    this.app.all('*', (req: Request, res: Response, next: NextFunction) => {
+      res.cookie('XSRF-TOKEN', req.csrfToken())
+      next()
+    })
+
+// in view post form add this
+<input type="hidden" name="_csrf" value="${Cookies.get('XSRF-TOKEN')}">
+
+// in api add header
+'CSRF-Token': Cookies.get('XSRF-TOKEN')
